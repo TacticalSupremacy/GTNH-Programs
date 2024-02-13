@@ -36,7 +36,7 @@ end
 function LifeEssenceStatus()
     if term.isAvailable() then
         term.clearLine()
-        term.write(string.format("AE2 Blood Level: %.2f %%, %.0d mb / %.0d mb\n", ae2.GetLifeEssence() / config.LifeEssenceTarget *100, ae2.GetLifeEssence(), config.LifeEssenceTarget))
+        term.write(string.format("AE2 Blood Level: %s %%, %s mb / %s mb\n", ae2.GetLifeEssence() / config.LifeEssenceTarget *100, ae2.GetLifeEssence(), config.LifeEssenceTarget))
     end
 end
 
