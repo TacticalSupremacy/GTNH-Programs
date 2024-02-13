@@ -129,7 +129,7 @@ function CraftSlate(craft_slot, ingredient_slot)
     end
     while crafting do
         if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft_slot]["name"] then
-            if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
+            if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, craft_slot) ~= 1 then
                 term.write("Could not move Slate out, Failing\n")
             else
                 term.write(string.format("Craft Complete: %s", craft_slot))
