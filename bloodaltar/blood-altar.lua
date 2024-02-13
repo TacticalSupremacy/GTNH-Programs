@@ -53,6 +53,12 @@ local bloodOrbSlot = 7
 
 local slateInfo = {
     {
+        name = "Arcane Slate",
+        id = "dreamcraft:ArcaneSlate",
+        blood = 0,
+        tier = 0
+    },
+    {
         name = "Blank Slate",
         id = "AWWayOfTime:blankSlate",
         blood = 1000,
@@ -113,6 +119,8 @@ function CraftSlate(craft_slot, ingredient_slot)
         term.write("Found Blood Orb in Altar, moving it out to begin crafting\n")
         if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
             term.write("Could not move Blood Orb, Failing\n")
+        else
+            term.write("Crafting: %s using %s mb", slateInfo[craft_slot].name, slateInfo[craft_slot].blood)
         end
     end
     -- Insert a stone into the altar --
@@ -120,7 +128,7 @@ function CraftSlate(craft_slot, ingredient_slot)
         term.write("Could not move Slate in, Failing\n")
     end
     while crafting do
-        if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft_slot]["slot"] then
+        if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft_slot]["name"] then
             if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
                 term.write("Could not move Slate out, Failing\n")
             else
