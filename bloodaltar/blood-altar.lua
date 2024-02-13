@@ -5,7 +5,7 @@ local term = require("term")
 local component = require("component")
 
 local transposer = component.transposer
-local ae2 = require("blood-altar-ae2")
+ae2 = require("blood-altar-ae2")
 
 function CraftSlate(craft, ingredient)
     local crafting = true
@@ -36,7 +36,7 @@ end
 function LifeEssenceStatus()
     if term.isAvailable() then
         term.clearLine()
-        term.write(string.format("AE2 Blood Level: %s %%, %s mb / %s mb\n", ae2.GetLifeEssence() / config.LifeEssenceTarget *100, ae2.GetLifeEssence(), config.LifeEssenceTarget))
+        term.write(string.format("AE2 Blood Level:  %s mb / %s mb\n", ae2.GetLifeEssence(), config.LifeEssenceTarget))
     end
 end
 
