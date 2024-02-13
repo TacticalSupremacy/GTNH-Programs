@@ -87,7 +87,12 @@ local slateInfo = {
 function GetLifeEssence()
     for i, fluid in pairs(component.me_interface.getFluidsInNetwork()) do
         if fluid["label"] == "Life Essence" then
-            return fluid.amount
+            a = fluid.amount
+            if a == nil then
+                return 0
+            else
+                return fluid.amount
+            end
         end
     end
 end
