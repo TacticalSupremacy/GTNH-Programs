@@ -1,29 +1,34 @@
 -- Configured for GTNH, Higher blood requirements than normal.
 
-slateInfo = {
+SlateInfo = {
     {
         name = "Blank Slate",
+        id = "AWWayOfTime:blankSlate",
         blood = 1000,
         tier = 1
     },
     {
         name = "Reinforced Slate",
-        blood = 2000,
+        id = "AWWayOfTime:reinforcedSlate",
+        blood = 2500,
         tier = 2
     },
     {
         name = "Imbued Slate",
-        blood = 5000,
+        id = "AWWayOfTime:imbuedSlate",
+        blood = 7500,
         tier = 3
     },
     {
         name = "Demonic Slate",
-        blood = 15000,
+        id = "AWWayOfTime:demonicSlate",
+        blood = 20000,
         tier = 4
     },
     {
         name = "Ethereal Slate",
-        blood = 30000,
+        id = "AWWayOfTime:bloodMagicBaseItems",
+        blood = 60000,
         tier = 5
     }   
 }

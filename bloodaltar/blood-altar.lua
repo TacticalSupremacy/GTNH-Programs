@@ -9,59 +9,61 @@ License: CC BY 4.0
 local config = require('config')
 local slates = require('slates')
 
-term = require("term")
-component = require("component")
+local term = require("term")
+local component = require("component")
 
-transpose = component.transposer
-ae2 = component.ae2
+local transpose = component.transposer
+local ae2 = component.ae2
 
-stackInfo = {}
+StackInfo = {}
+
+LifeEssence = 0
  
 function SetStackInfoBasic()
-    stackInfo[1] = transpose.getStackInSlot(config.chestSide, config.slateBSlot)
+    StackInfo[1] = transpose.getStackInSlot(config.chestSide, config.slateBSlot)
 end
  
 function SetStackInfoReinforced()
-    stackInfo[2] = transpose.getStackInSlot(config.chestSide, config.slateRSlot)
+    StackInfo[2] = transpose.getStackInSlot(config.chestSide, config.slateRSlot)
 end
  
 function SetStackInfoImbued()
-    stackInfo[3] = transpose.getStackInSlot(config.chestSide, config.slateISlot)
+    StackInfo[3] = transpose.getStackInSlot(config.chestSide, config.slateISlot)
 end
  
 function SetStackInfoDemonic()
-    stackInfo[4] = transpose.getStackInSlot(config.chestSide, config.slateDSlot)
+    StackInfo[4] = transpose.getStackInSlot(config.chestSide, config.slateDSlot)
 end
  
 function SetStackInfoEthereal()
-    stackInfo[5] = transpose.getStackInSlot(config.chestSide, config.slateESlot)
+    StackInfo[5] = transpose.getStackInSlot(config.chestSide, config.slateESlot)
 end
  
 function SetDefaultStackInfo()
     if pcall(SetStackInfoBasic) then ;
     else
-        stackInfo[1].label = slates.slateInfo[1].name
-        stackInfo[1].size = 0
+        StackInfo[1].label = slates.slateInfo[1].name
+        StackInfo[1].size = 0
     end
     if pcall(SetStackInfoReinforced) then ;
     else
-        stackInfo[2].label = slates.slateInfo[2].name
-        stackInfo[2].size = 0
+        StackInfo[2].label = slates.slateInfo[2].name
+        StackInfo[2].size = 0
     end
     if pcall(SetStackInfoImbued) then ;
     else
-        stackInfo[3].label = slates.slateInfo[3].name
-        stackInfo[3].size = 0
+        StackInfo[3].label = slates.slateInfo[3].name
+        StackInfo[3].size = 0
     end
     if pcall(SetStackInfoDemonic) then ;
     else
-        stackInfo[4].label = slates.slateInfo[4].name
-        stackInfo[4].size = 0
+        StackInfo[4].label = slates.slateInfo[4].name
+        StackInfo[4].size = 0
     end
     if pcall(SetStackInfoEthereal) then ;
     else
-        stackInfo[5].label = slates.slateInfo[5].name
-        stackInfo[5].size = 0
+        StackInfo[5].label = slates.slateInfo[5].name
+        StackInfo[5].size = 0
     end
 end
 
@@ -198,15 +200,15 @@ while true do
     
     currentTank = transpose.getFluidInTank(config.altarSide, config.altarTank).amount
     
-    if config.BloodAltarTier >= slates.slateInfo[1].tier and stackInfo[1].label == slates.slateInfo[1].name and stackInfo[1].size < config.slateBCount and currentTank >= slates.slateInfo[1].blood then
+    if config.BloodAltarTier >= slates.slateInfo[1].tier and StackInfo[1].label == slates.slateInfo[1].name and StackInfo[1].size < config.slateBCount and currentTank >= slates.slateInfo[1].blood then
         BlankSlate()
-    elseif config.BloodAltarTier >= slates.slateInfo[2].tier and stackInfo[2].label == slates.slateInfo[2].name and stackInfo[2].size < config.slateRCount and currentTank >= slates.slateInfo[2].blood then
+    elseif config.BloodAltarTier >= slates.slateInfo[2].tier and StackInfo[2].label == slates.slateInfo[2].name and StackInfo[2].size < config.slateRCount and currentTank >= slates.slateInfo[2].blood then
         ReinforcedSlate()
-    elseif config.BloodAltarTier >= slates.slateInfo[3].tier and stackInfo[3].label == slates.slateInfo[3].name and stackInfo[3].size < config.slateICount and currentTank >= slates.slateInfo[3].blood then
+    elseif config.BloodAltarTier >= slates.slateInfo[3].tier and StackInfo[3].label == slates.slateInfo[3].name and StackInfo[3].size < config.slateICount and currentTank >= slates.slateInfo[3].blood then
         ImbuedSlate()
-    elseif config.BloodAltarTier >= slates.slateInfo[4].tier and stackInfo[4].label == slates.slateInfo[4].name and stackInfo[4].size < config.slateDCount and currentTank >= slates.slateInfo[4].blood then
+    elseif config.BloodAltarTier >= slates.slateInfo[4].tier and StackInfo[4].label == slates.slateInfo[4].name and StackInfo[4].size < config.slateDCount and currentTank >= slates.slateInfo[4].blood then
         DemonicSlate()
-    elseif config.BloodAltarTier >= slates.slateInfo[5].tier and stackInfo[5].label == slates.slateInfo[5].name and stackInfo[5].size < config.slateECount and currentTank >= slates.slateInfo[5].blood then
+    elseif config.BloodAltarTier >= slates.slateInfo[5].tier and StackInfo[5].label == slates.slateInfo[5].name and StackInfo[5].size < config.slateECount and currentTank >= slates.slateInfo[5].blood then
         EtherealSlate()
     end
 end
