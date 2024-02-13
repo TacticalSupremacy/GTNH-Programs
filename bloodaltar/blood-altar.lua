@@ -129,14 +129,14 @@ function CraftSlate(craft_slot, ingredient_slot)
     if transposer.transferItem(dualinterfaceSide, altarSide, 1, slateConfig[ingredient_slot]["slot"], altarSlot) ~= 1 then
         term.write("Could not move Slate in, Failing\n")
     else
-        term.write(string.format("Crafting: %s using %s mb", slateInfo[craft_slot].name, slateInfo[craft_slot].blood))
+        term.write(string.format("Crafting: %s using %s mb\n", slateInfo[craft_slot].name, slateInfo[craft_slot].blood))
     end
     while crafting do
         if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft_slot]["name"] then
             if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, craft_slot) ~= 1 then
                 term.write("Could not move Slate out, Failing\n")
             else
-                term.write(string.format("Craft Complete: %s", slateInfo[craft_slot].name))
+                term.write(string.format("Craft Complete: %s\n", slateInfo[craft_slot].name))
                 crafting=false
             end
         end
