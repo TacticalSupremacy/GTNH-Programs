@@ -5,7 +5,23 @@ local term = require("term")
 local component = require("component")
 
 local transposer = component.transposer
-ae2 = require("blood-altar-ae2")
+
+function GetLifeEssence()
+    for i, fluid in pairs(component.me_interface.getFluidsInNetwork()) do
+        if fluid["label"] == "Life Essence" then
+            return fluid.amount
+        end
+    end
+end
+
+function GetItem(name)
+    for i, item in pairs(component.me_interface.getItemsInNetwork({label = name})) do
+        return item.size
+    end
+end
+
+function ConfigureFluidInterface()
+end
 
 function CraftSlate(craft, ingredient)
     local crafting = true
@@ -36,7 +52,7 @@ end
 function LifeEssenceStatus()
     if term.isAvailable() then
         term.clearLine()
-        term.write(string.format("AE2 Blood Level:  %s mb / %s mb\n", ae2.GetLifeEssence(), config.LifeEssenceTarget))
+        term.write(string.format("AE2 Blood Level:  %s mb / %s mb\n", GetLifeEssence(), config.LifeEssenceTarget))
     end
 end
 
@@ -44,19 +60,19 @@ term.clear()
 while true do
     LifeEssenceStatus()
 
-    if ae2.GetItem("Arcane Slate") > 0 and ae2.GetItem("Blank Slate") < config.SlateConfig["Blank Slate"]["target"] then
+    if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < config.SlateConfig["Blank Slate"]["target"] then
         CraftSlate("Arcane Slate", "Blank Slate")
 
-    elseif config.BloodAltarTier >= 2 and ae2.GetItem("Blank Slate") > 0 and ae2.GetItem("Reinforced Slate") < config.SlateConfig["Reinforced Slate"]["target"] then
+    elseif config.BloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < config.SlateConfig["Reinforced Slate"]["target"] then
         CraftSlate("Blank Slate", "Reinforced Slate")
 
-    elseif config.BloodAltarTier >= 3 and ae2.GetItem("Reinforced Slate") > 0 and ae2.GetItem("Imbued Slate") < config.SlateConfig["Imbued Slate"]["target"] then
+    elseif config.BloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < config.SlateConfig["Imbued Slate"]["target"] then
         CraftSlate("Reinforced Slate", "Imbued Slate")
 
-    elseif  config.BloodAltarTier >= 4 and ae2.GetItem("Imbued Slate") > 0 and ae2.GetItem("Demonic Slate") < config.SlateConfig["Demonic Slate"]["target"] then
+    elseif  config.BloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < config.SlateConfig["Demonic Slate"]["target"] then
         CraftSlate("Imbued Slate", "Demonic Slate")
 
-    elseif config.BloodAltarTier >= 5 and ae2.GetItem("Demonic Slate") > 0 and ae2.GetItem("Ethereal Slate") < config.SlateConfig["Ethereal Slate"]["target"] then
+    elseif config.BloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < config.SlateConfig["Ethereal Slate"]["target"] then
         CraftSlate("Demonic Slate", "Ethereal Slate")
     end
 end
