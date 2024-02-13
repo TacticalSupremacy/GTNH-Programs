@@ -1,10 +1,87 @@
-local config = require('blood-altar-config')
-local slates = require('blood-altar-slates')
-
 local term = require("term")
 local component = require("component")
-
 local transposer = component.transposer
+
+BloodAltarTier = 5  -- Change manually depending on your Altar level, Default: 5 (Tier: V)
+ 
+dualinterfaceSide = 5
+altarSide = 2
+  
+-- Altar slots do not need to be changed, unless WayOfTime add additional inventory slots or tanks to the Blood Altar
+altarSlot = 1  
+altarTank = 1
+
+-- Configure your AE2 Systems targets here --
+-- Setup the Dual Interface to have these in their progressional order, if not you can change it here --
+SlateConfig = {
+    {
+        name = "Arcane Slate",
+        slot = 1,
+        target = 0
+    },
+    {
+        name = "Blank Slate",
+        slot = 2,
+        target = 64
+    },
+    {
+        name = "Reinforced Slate",
+        slot = 3,
+        target = 64
+    },
+    {
+        name = "Imbued Slate",
+        slot = 4,
+        target = 64
+    },
+    {
+        name = "Demonic Slate",
+        slot = 5,
+        target = 64
+    },
+    {
+        name = "Ethereal Slate",
+        slot = 6,
+        target = 64
+    }   
+}
+LifeEssenceTarget = 1000000
+BloodOrbLabel = "Master Blood Orb"
+
+-- Configured for GTNH, Higher blood requirements than normal.
+
+SlateInfo = {
+    {
+        name = "Blank Slate",
+        id = "AWWayOfTime:blankSlate",
+        blood = 1000,
+        tier = 1
+    },
+    {
+        name = "Reinforced Slate",
+        id = "AWWayOfTime:reinforcedSlate",
+        blood = 2500,
+        tier = 2
+    },
+    {
+        name = "Imbued Slate",
+        id = "AWWayOfTime:imbuedSlate",
+        blood = 7500,
+        tier = 3
+    },
+    {
+        name = "Demonic Slate",
+        id = "AWWayOfTime:demonicSlate",
+        blood = 20000,
+        tier = 4
+    },
+    {
+        name = "Ethereal Slate",
+        id = "AWWayOfTime:bloodMagicBaseItems",
+        blood = 60000,
+        tier = 5
+    }   
+}
 
 function GetLifeEssence()
     for i, fluid in pairs(component.me_interface.getFluidsInNetwork()) do
