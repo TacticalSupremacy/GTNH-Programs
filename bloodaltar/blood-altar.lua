@@ -115,7 +115,9 @@ end
 function CraftSlate(craft_slot, ingredient_slot)
     local crafting = true
     -- Move Blood Orb Out --
-    if transposer.getStackInSlot(altarSide, altarSlot).label ~= nil then
+    if transposer.getSlotStackSize(altarSide, altarSlot) == 0 then
+        term.write("No Blood Orb in Altar detected\n")
+    else
         if transposer.getStackInSlot(altarSide, altarSlot).label == bloodOrbLabel then
             term.write("Found Blood Orb in Altar, moving it out to begin crafting\n")
             if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
@@ -167,7 +169,7 @@ while true do
             CraftSlate(4, 3)
         end
     end
-    if GetItem("Imbued Slate") ~= nil and GetItem("Demonic Slate") then
+    if GetItem("Imbued Slate") ~= nil and GetItem("Demonic Slate") ~= nil then
         if  bloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < slateConfig[5]["target"] then
             CraftSlate(5, 4)
         end
