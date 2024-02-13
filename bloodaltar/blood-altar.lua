@@ -2,18 +2,18 @@ local term = require("term")
 local component = require("component")
 local transposer = component.transposer
 
-BloodAltarTier = 5  -- Change manually depending on your Altar level, Default: 5 (Tier: V)
+local bloodAltarTier = 5  -- Change manually depending on your Altar level, Default: 5 (Tier: V)
  
-dualinterfaceSide = 5
-altarSide = 2
+local dualinterfaceSide = 5
+local altarSide = 2
   
 -- Altar slots do not need to be changed, unless WayOfTime add additional inventory slots or tanks to the Blood Altar
-altarSlot = 1  
-altarTank = 1
+local altarSlot = 1  
+local altarTank = 1
 
 -- Configure your AE2 Systems targets here --
 -- Setup the Dual Interface to have these in their progressional order, if not you can change it here --
-SlateConfig = {
+local slateConfig = {
     {
         name = "Arcane Slate",
         slot = 1,
@@ -45,12 +45,13 @@ SlateConfig = {
         target = 64
     }   
 }
-LifeEssenceTarget = 1000000
-BloodOrbLabel = "Master Blood Orb"
+local lifeEssenceTarget = 1000000
+local bloodOrbLabel = "Master Blood Orb"
+local bloodOrbSlot = 7
 
 -- Configured for GTNH, Higher blood requirements than normal.
 
-SlateInfo = {
+local slateInfo = {
     {
         name = "Blank Slate",
         id = "AWWayOfTime:blankSlate",
@@ -103,19 +104,19 @@ end
 function CraftSlate(craft, ingredient)
     local crafting = true
     -- Move Blood Orb Out --
-    if transposer.getStackInSlot(config.altarSide, config.altarSlot).label == config.BloodOrbLabel then
+    if transposer.getStackInSlot(altarSide, altarSlot).label == bloodOrbLabel then
         term.write("Found Blood Orb in Altar, moving it out to begin crafting\n")
-        if transposer.transferItem(config.altarSide, config.dualinterfaceSide, 1, config.altarSlot, config.BloodOrbSlot) ~= 1 then
+        if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
             term.write("Could not move Blood Orb, Failing\n")
         end
     end
     -- Insert a stone into the altar --
-    if transposer.transferItem(config.dualinterfaceSide, config.altarSide, 1, config.SlateConfig[ingredient]["slot"], config.altarSlot) ~= 1 then
+    if transposer.transferItem(dualinterfaceSide, altarSide, 1, slateConfig[ingredient]["slot"], altarSlot) ~= 1 then
         term.write("Could not move Slate in, Failing\n")
     end
     while crafting do
-        if transposer.getStackInSlot(config.altarSide, config.altarSlot).label == config.SlateConfig[craft]["slot"] then
-            if transposer.transferItem(config.altarSide, config.dualinterfaceSide, 1, config.altarSlot, config.BloodOrbSlot) ~= 1 then
+        if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft]["slot"] then
+            if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
                 term.write("Could not move Slate out, Failing\n")
             else
                 term.write(string.format("Craft Complete: %s", craft))
@@ -129,7 +130,7 @@ end
 function LifeEssenceStatus()
     if term.isAvailable() then
         term.clearLine()
-        term.write(string.format("AE2 Blood Level:  %s mb / %s mb\n", GetLifeEssence(), config.LifeEssenceTarget))
+        term.write(string.format("AE2 Blood Level:  %s mb / %s mb\n", GetLifeEssence(), lifeEssenceTarget))
     end
 end
 
@@ -137,19 +138,19 @@ term.clear()
 while true do
     LifeEssenceStatus()
 
-    if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < config.SlateConfig["Blank Slate"]["target"] then
+    if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < slateConfig["Blank Slate"]["target"] then
         CraftSlate("Arcane Slate", "Blank Slate")
 
-    elseif config.BloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < config.SlateConfig["Reinforced Slate"]["target"] then
+    elseif bloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < slateConfig["Reinforced Slate"]["target"] then
         CraftSlate("Blank Slate", "Reinforced Slate")
 
-    elseif config.BloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < config.SlateConfig["Imbued Slate"]["target"] then
+    elseif bloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < slateConfig["Imbued Slate"]["target"] then
         CraftSlate("Reinforced Slate", "Imbued Slate")
 
-    elseif  config.BloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < config.SlateConfig["Demonic Slate"]["target"] then
+    elseif  bloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < slateConfig["Demonic Slate"]["target"] then
         CraftSlate("Imbued Slate", "Demonic Slate")
 
-    elseif config.BloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < config.SlateConfig["Ethereal Slate"]["target"] then
+    elseif bloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < slateConfig["Ethereal Slate"]["target"] then
         CraftSlate("Demonic Slate", "Ethereal Slate")
     end
 end
