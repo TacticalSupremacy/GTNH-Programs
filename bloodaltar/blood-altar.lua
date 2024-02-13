@@ -142,20 +142,29 @@ end
 term.clear()
 while true do
     LifeEssenceStatus()
-
-    if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < slateConfig["Blank Slate"]["target"] then
-        CraftSlate("Arcane Slate", "Blank Slate")
-
-    elseif bloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < slateConfig["Reinforced Slate"]["target"] then
-        CraftSlate("Blank Slate", "Reinforced Slate")
-
-    elseif bloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < slateConfig["Imbued Slate"]["target"] then
-        CraftSlate("Reinforced Slate", "Imbued Slate")
-
-    elseif  bloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < slateConfig["Demonic Slate"]["target"] then
-        CraftSlate("Imbued Slate", "Demonic Slate")
-
-    elseif bloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < slateConfig["Ethereal Slate"]["target"] then
+    if GetItem("Arcane Slate") ~= nil then
+        if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < slateConfig["Blank Slate"]["target"] then
+            CraftSlate("Arcane Slate", "Blank Slate")
+        end
+    end
+    if GetItem("Arcane Slate") ~= nil then
+        if bloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < slateConfig["Reinforced Slate"]["target"] then
+            CraftSlate("Blank Slate", "Reinforced Slate")
+        end
+    end
+    if GetItem("Arcane Slate") ~= nil then
+        if bloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < slateConfig["Imbued Slate"]["target"] then
+            CraftSlate("Reinforced Slate", "Imbued Slate")
+        end
+    end
+    if GetItem("Arcane Slate") ~= nil then
+        if  bloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < slateConfig["Demonic Slate"]["target"] then
+            CraftSlate("Imbued Slate", "Demonic Slate")
+        end
+    end
+    if GetItem("Arcane Slate") ~= nil then
+        if bloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < slateConfig["Ethereal Slate"]["target"] then
         CraftSlate("Demonic Slate", "Ethereal Slate")
+        end
     end
 end
