@@ -12,7 +12,7 @@ local altarSlot = 1
 local altarTank = 1
 
 -- Configure your AE2 Systems targets here --
--- Setup the Dual Interface to have these in their progressional order, if not you can change it here --
+-- Setup the Dual Interface to have these in their prrogressional order, if not you can change it here --
 local slateConfig = {
     {
         name = "Arcane Slate",
@@ -87,7 +87,7 @@ local slateInfo = {
 function GetLifeEssence()
     for i, fluid in pairs(component.me_interface.getFluidsInNetwork()) do
         if fluid["label"] == "Life Essence" then
-            a = fluid.amount
+            local a = fluid.amount
             if a == nil then
                 return 0
             else
@@ -106,7 +106,7 @@ end
 function ConfigureFluidInterface()
 end
 
-function CraftSlate(craft, ingredient)
+function CraftSlate(craft_slot, ingredient_slot)
     local crafting = true
     -- Move Blood Orb Out --
     if transposer.getStackInSlot(altarSide, altarSlot).label == bloodOrbLabel then
@@ -116,15 +116,15 @@ function CraftSlate(craft, ingredient)
         end
     end
     -- Insert a stone into the altar --
-    if transposer.transferItem(dualinterfaceSide, altarSide, 1, slateConfig[ingredient]["slot"], altarSlot) ~= 1 then
+    if transposer.transferItem(dualinterfaceSide, altarSide, 1, slateConfig[craft_slot]["slot"], altarSlot) ~= 1 then
         term.write("Could not move Slate in, Failing\n")
     end
     while crafting do
-        if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft]["slot"] then
+        if transposer.getStackInSlot(altarSide, altarSlot).label == slateConfig[craft_slot]["slot"] then
             if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
                 term.write("Could not move Slate out, Failing\n")
             else
-                term.write(string.format("Craft Complete: %s", craft))
+                term.write(string.format("Craft Complete: %s", craft_slot))
                 crafting=false
             end
         end
@@ -143,28 +143,28 @@ term.clear()
 while true do
     LifeEssenceStatus()
     if GetItem("Arcane Slate") ~= nil then
-        if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < slateConfig["Blank Slate"]["target"] then
-            CraftSlate("Arcane Slate", "Blank Slate")
+        if GetItem("Arcane Slate") > 0 and GetItem("Blank Slate") < slateConfig[1]["target"] then
+            CraftSlate(1, 2)
         end
     end
     if GetItem("Blank Slate") ~= nil then
-        if bloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < slateConfig["Reinforced Slate"]["target"] then
-            CraftSlate("Blank Slate", "Reinforced Slate")
+        if bloodAltarTier >= 2 and GetItem("Blank Slate") > 0 and GetItem("Reinforced Slate") < slateConfig[2]["target"] then
+            CraftSlate(2, 3)
         end
     end
     if GetItem("Reinforced Slate") ~= nil then
-        if bloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < slateConfig["Imbued Slate"]["target"] then
-            CraftSlate("Reinforced Slate", "Imbued Slate")
+        if bloodAltarTier >= 3 and GetItem("Reinforced Slate") > 0 and GetItem("Imbued Slate") < slateConfig[3]["target"] then
+            CraftSlate(3, 4)
         end
     end
     if GetItem("Imbued Slate") ~= nil then
-        if  bloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < slateConfig["Demonic Slate"]["target"] then
-            CraftSlate("Imbued Slate", "Demonic Slate")
+        if  bloodAltarTier >= 4 and GetItem("Imbued Slate") > 0 and GetItem("Demonic Slate") < slateConfig[4]["target"] then
+            CraftSlate(4, 5)
         end
     end
     if GetItem("Demonic Slate") ~= nil then
-        if bloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < slateConfig["Ethereal Slate"]["target"] then
-        CraftSlate("Demonic Slate", "Ethereal Slate")
+        if bloodAltarTier >= 5 and GetItem("Demonic Slate") > 0 and GetItem("Ethereal Slate") < slateConfig[5]["target"] then
+        CraftSlate(5, 6)
         end
     end
 end
