@@ -124,7 +124,7 @@ function CraftSlate(craft_slot, ingredient_slot)
         end
     end
     -- Insert a stone into the altar --
-    if transposer.transferItem(dualinterfaceSide, altarSide, 1, slateConfig[craft_slot]["slot"], altarSlot) ~= 1 then
+    if transposer.transferItem(dualinterfaceSide, altarSide, 1, slateConfig[ingredient_slot]["slot"], altarSlot) ~= 1 then
         term.write("Could not move Slate in, Failing\n")
     end
     while crafting do
