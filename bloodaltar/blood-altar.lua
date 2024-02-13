@@ -179,4 +179,8 @@ while true do
         CraftSlate(6, 5)
         end
     end
+    -- Put Blood Orb _Back In_ --
+    -- Check LP levels --
+    -- Check Altar Levels --
+    -- Repeat --
 end
