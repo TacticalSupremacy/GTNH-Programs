@@ -120,7 +120,7 @@ function CraftSlate(craft_slot, ingredient_slot)
         if transposer.transferItem(altarSide, dualinterfaceSide, 1, altarSlot, bloodOrbSlot) ~= 1 then
             term.write("Could not move Blood Orb, Failing\n")
         else
-            term.write("Crafting: %s using %s mb", slateInfo[craft_slot].name, slateInfo[craft_slot].blood)
+            term.write(string.format("Crafting: %s using %s mb", slateInfo[craft_slot].name, slateInfo[craft_slot].blood))
         end
     end
     -- Insert a stone into the altar --
