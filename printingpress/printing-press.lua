@@ -33,7 +33,7 @@ end
 function CraftBook()
     --Handle Plates--
     if transposer.getSlotStackSize(printingpressside, ppplateslot) == 0 then
-        if transposer.transferItem(meinterfaceside, printingpressside, 1, meiplateslot, ppplateslot) ~= 1
+        if transposer.transferItem(meinterfaceside, printingpressside, 1, meiplateslot, ppplateslot) ~= 1 then
             term.write("Plate Inserted")
         else 
             term.write("Plate did not get inserted, please investigate")
@@ -42,14 +42,14 @@ function CraftBook()
     else
         if transposer.getStackInSlot(printingpressside, ppplateslot)["damage"] == 2 then
             -- remove a damaged plate
-            if transposer.transferItem(printingpressside, meinterfaceside, 1, ppplateslot, meidamagedplateslot) ~= 1
+            if transposer.transferItem(printingpressside, meinterfaceside, 1, ppplateslot, meidamagedplateslot) ~= 1 then
                 term.write("Damaged Plate Removed")
             else 
                 term.write("Damaged Plate did not get removed, please investigate")
                 os.exit()
             end
-        else if transposer.getStackInSlot(printingpressside,2)["damage"] == 1 then
-            -- eh this is fine --
+        elseif transposer.getStackInSlot(printingpressside,2)["damage"] == 1 then
+            term.write("Partially Damaged Plate Detected, Continuing")
         end
     end
 
@@ -64,9 +64,9 @@ function CraftBook()
 
     -- Now we wait on a book and remove it --
     local crafting = true
-    while crafting is true
+    while crafting do
         if transposer.getStackInSlot(5,3) ~= nil then
-            transposer.transferItem(printingpressside, meinterfaceside, 1, ppoutoutslot, meioutputslot)
+            transposer.transferItem(printingpressside, meinterfaceside, 1, ppoutputslot, meioutputslot)
             crafting = false
         end
     end
@@ -74,17 +74,17 @@ end
 
 -- Check AE2 for FortuneBooks? if less than target continue. Apparently NBT data is not exposed. Press F
 
-if AE2GetItem("Ink Sac") < fortunebookcraft
+if AE2GetItem("Ink Sac") < fortunebookcraft then
     term.write("Not Enough Ink Sac's to craft target")
     os.exit()
 end
 
-if AE2GetItem("Book") < fortunebookcraft
+if AE2GetItem("Book") < fortunebookcraft then
     term.write("Not Enough Book's to craft target")
     os.exit()
 end
 
-if AE2GetItemWithDamage("Enchanted Plate", 0) < (fortunebookcraft / 2)
+if AE2GetItemWithDamage("Enchanted Plate", 0) < (fortunebookcraft / 2) then
     term.write("Not enough undamaged plates are detected in AE2 to craft target")
     os.exit()
 end
