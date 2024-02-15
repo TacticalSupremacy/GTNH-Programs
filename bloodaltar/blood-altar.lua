@@ -157,9 +157,11 @@ end
 
 function RegenAltar()
     if GetAltarLifeEssence() <= altarCritical then
+        term.write("Altar is Critical on Blood, Entering REGEN mode\n")
         local regen = true
         while regen do
             if GetAltarLifeEssence() >= altarCritical then
+                term.write("Altar is recharged, exiting REGEN Mode\n")
             regen = false
             end
         end
@@ -177,12 +179,5 @@ while true do
     CraftSlate(6, 5)
     InsertBloodOrb()
     RegenAltar()
-
-
-
-    -- Check Altar Levels --
-    
-    
-    -- Check LP levels --
     -- Repeat --
 end
