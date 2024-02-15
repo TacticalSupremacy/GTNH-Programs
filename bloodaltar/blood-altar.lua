@@ -159,7 +159,7 @@ function RegenAltar()
     if GetAltarLifeEssence() <= altarCritical then
         local regen = true
         while regen do
-            if GetAltarLifeEssence >= altarCritical then
+            if GetAltarLifeEssence() >= altarCritical then
             regen = false
             end
         end
