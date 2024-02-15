@@ -85,7 +85,7 @@ function AE2GetLifeEssence()
 end
 
 function GetAltarLifeEssence()
-    if component.transposer.getFluidInTank(altarSide).amount ~= nil then
+    if component.transposer.getFluidInTank(altarSide) ~= nil then
         return component.transposer.getFluidInTank(altarSide, altarTank).amount
     else
         return 0
