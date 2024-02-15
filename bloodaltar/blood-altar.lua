@@ -29,7 +29,7 @@ local slateConfig = {
         blood = 1000,
         tier = 1,
         slot = 2,
-        target = 64
+        target = 128
     },
     {
         label = "Reinforced Slate",
@@ -37,7 +37,7 @@ local slateConfig = {
         blood = 2500,
         tier = 2,
         slot = 3,
-        target = 64
+        target = 128
     },
     {
         label = "Imbued Slate",
@@ -45,7 +45,7 @@ local slateConfig = {
         blood = 7500,
         tier = 3,
         slot = 4,
-        target = 64
+        target = 128
     },
     {
         label = "Demonic Slate",
@@ -53,7 +53,7 @@ local slateConfig = {
         blood = 20000,
         tier = 4,
         slot = 5,
-        target = 64
+        target = 128
     },
     {
         label = "Ethereal Slate",
@@ -61,7 +61,7 @@ local slateConfig = {
         blood = 60000,
         tier = 5,
         slot = 6,
-        target = 64
+        target = 128
     }   
 }
 local lifeEssenceTarget = 1000000
